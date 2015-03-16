@@ -1,5 +1,6 @@
 $('document').ready(function(){
   
+  var player
   var scoreboard
   var frame; 
   var rollsArray
@@ -8,59 +9,43 @@ $('document').ready(function(){
   rackupFrame();
   
   function newGame(){
+    player = new Player
     scoreboard = new ScoreBoard
     unpopulateTable();
     unpopulateRollTable();
   }
 
   function rackupFrame(){
+    player.newFrame();
     frame = new Frame;
   }; 
 
-  function rackupFrameTen(){
+  function rackFrameTen(){
+    player.newFrame();
     frame = new FrameTen;
   }; 
-
-  function getRoll(){
-
-  };
 
   function totalScore(){
     $('#total-score').text(scoreboard.currentScore);
   };
 
-  function populateRollTable(){
-    $('.roll').each(function(i){
-      $(this).text(rollsArray[i]);
-    }); 
-  };
-
-  function unpopulateRollTable(){
-    $('.roll').each(function(){
-      $(this).text("-");
-    });     
-  };
-
-  function populateTable(){
-    $('.frame').each(function(i){
-      if(typeof scoreboard.frameScores[i]!='undefined') return $(this).text(scoreboard.frameScores[i]);
-      return $(this).text("-");
-    });  
-  };
-
-  function unpopulateTable(){
-    $('.frame').each(function(){
-      return $(this).text("-");
-    }); 
+  function getRoll(){
+    return player.roll();
   };
 
   function frameTen(){
     roll = getRoll();
-    if(!frame.rollOneDone) frame.getRollOne(roll);
-    if(!frame.rollTwoDone) frame.getRollTwo(roll);
+    if(!frame.rollOneDone) frame.getRollOne(roll, player);
+    if(!frame.rollTwoDone) frame.getRollTwo(roll, player);
     if(!frame.rollThreeDone) frame.getRollThree(roll); 
+    postRollDo();
   };
-  
+    
+  function postRollDo(){
+    displayPins();
+    onClickDo(); 
+  }
+
   function checkFrameTen(){
     if(frame.rollThreeDone) closeFrame();
   }
@@ -69,7 +54,7 @@ $('document').ready(function(){
     doScoreBoardCloseFrame();
     totalScore();
     if(scoreboard.frameScores.length < 10) return rackupFrame();
-    return rackupFrameTen(); 
+    return rackFrameTen(); 
   }
 
   function doScoreBoardCloseFrame(){
@@ -88,5 +73,29 @@ $('document').ready(function(){
     populateRollTable(); 
   };
 
+  function populateRollTable(){
+    $('.roll').each(function(i){
+      $(this).text(rollsArray[i]);
+    }); 
+  };
+
+  function unpopulateRollTable(){
+    $('.roll').each(function(i){
+      $(this).text("-");
+    });     
+  };
+
+  function populateTable(){
+    $('.frame').each(function(index){
+      if(typeof scoreboard.frameScores[index]!='undefined') return $(this).text(scoreboard.frameScores[index]);
+      return $(this).text("-");
+    });  
+  };
+
+  function unpopulateTable(){
+    $('.frame').each(function(index){
+      return $(this).text("-");
+    }); 
+  };
 
 });
