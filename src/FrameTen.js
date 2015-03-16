@@ -32,7 +32,7 @@ FrameTen.prototype.getRollTwo = function(roll, player){
 };
 
 FrameTen.prototype.isRollThree = function(){
-  if(this.rollOneScore === 10 || this.rollOneScore + this.rollTwoScore === 10){
+  if(this.rollOneScore + this.rollTwoScore >= 10){
     return true
   }else{
     return false
