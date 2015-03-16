@@ -180,7 +180,6 @@ describe('ScoreBoard', function(){
     expect(scoreboard.gameOver).toEqual(true)  
   });
 
-
   it('can calculate a game', function(){
     frame1.getRoll(7)
     frame1.getRoll(3)
