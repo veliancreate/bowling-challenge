@@ -1,12 +1,12 @@
 FrameTen = function() {
-  this.pinsRemaining = 10
-  this.rollOneScore = 0
-  this.rollTwoScore = 0
-  this.rollThreeScore = 0
-  this.rollOneDone = false
-  this.rollTwoDone = false
-  this.rollThreeDone = false
-  this.frameOver = false
+  this.pinsRemaining = 10;
+  this.rollOneScore = 0;
+  this.rollTwoScore = 0;
+  this.rollThreeScore = 0;
+  this.rollOneDone = false;
+  this.rollTwoDone = false;
+  this.rollThreeDone = false;
+  this.frameOver = false;
 };
 
 FrameTen.prototype.getRoll = function(roll){
@@ -28,7 +28,7 @@ FrameTen.prototype.isRollThree = function(){
 };
 
 FrameTen.prototype.isFrameOver = function(){
-  if(this.isRollThree() && this.rollThreeDone) return this.frameOver = true
+  if(this.isRollThree() && this.rollThreeDone) this.frameOver = true;
 }
 
 FrameTen.prototype.isStrike = function(roll){

@@ -95,7 +95,7 @@ ScoreBoard.prototype.standardHalfStrikeFrame = function(frame){
 ScoreBoard.prototype.frameTen = function(frame){
   i = this.getFrameIndex(frame);
   this.frameScores[i] = frame.rollOneScore + frame.rollTwoScore + frame.rollThreeScore;
-  if(frame.frameOver = true) this.gameOver = true;
+  if(frame.frameOver === true) this.gameOver = true;
 };
 
 ScoreBoard.prototype.frameNine = function(frame){
