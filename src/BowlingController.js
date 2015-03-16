@@ -5,6 +5,7 @@ $('document').ready(function(){
   var frame; 
   var rollsArray
   var clicks
+  var isFrameTen = false
 
   newGame();
   rackupFrame();
@@ -22,7 +23,15 @@ $('document').ready(function(){
     frame = new Frame;
     displayPins();
     textTakeARoll();
-  };  
+  }; 
+
+  function rackFrameTen(){
+    player.newFrame();
+    frame = new FrameTen;
+    isFrameTen = true
+    displayPins();
+    textTakeARoll();  
+  }; 
 
   function displayPins(){
     $('#pins-remaining').text(frame.pinsRemaining);
@@ -54,15 +63,24 @@ $('document').ready(function(){
 
   $('#take-roll').click(function(e){
     e.preventDefault();
-    clicksCounter();    
+    clicksCounter();
+    if(frame instanceof FrameTen) return frameTen();    
     if(!isRollOneDone()) return rollOne();
     if(!isRollTwoDone()) return rollTwo();
   });
 
+  function frameTen(){
+    roll = getRoll();
+    if(!frame.rollOneDone) frame.getRollOne(roll, player);
+    if(!frame.rollTwoDone) frame.getRollTwo(roll, player);
+    if(!frame.rollThreeDone) frame.getRollThree(roll); 
+    postRollDo();
+  };
+
   function clicksCounter(){
     clicks++;
-    if(clicks===21) textNewGame();
-    if(clicks===22) location.reload();
+    // if(clicks===21) textNewGame();
+    // if(clicks===22) location.reload();
   }
 
   function rollOne(){
@@ -85,13 +103,25 @@ $('document').ready(function(){
   function onClickDo(){
     populateRollArray();
     populateTable();
+    if(isFrameTen = true) checkFrameTen();
     if(isRollOneDone() && isRollTwoDone()) closeFrame();
+  }
+
+  function checkFrameTen(){
+    if(frame.rollThreeDone){
+      closeFrame();
+    }  
   }
 
   function closeFrame(){
     doScoreBoardCloseFrame();
     totalScore();
-    rackupFrame();   
+    if(scoreboard.frameScores.length < 10){ 
+      rackupFrame();
+    }else{
+      rackFrameTen();
+    }  
+    console.log(scoreboard.frameScores.length)
   }
 
   function doScoreBoardCloseFrame(){
@@ -104,7 +134,8 @@ $('document').ready(function(){
     rollsArray = []  
     for (var i = 0; i < scoreboard.gameFrames.length; i++) {
       rollsArray.push(scoreboard.gameFrames[i].rollOneScore)
-      rollsArray.push(scoreboard.gameFrames[i].rollTwoScore) 
+      rollsArray.push(scoreboard.gameFrames[i].rollTwoScore)
+      if(typeof scoreboard.frameScores[i].rollThreeScore != 'undefined') rollsArray.push(scoreboard.gameFrames[i].rollThreeScore); 
     }; 
     populateRollTable(); 
   };
