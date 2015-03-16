@@ -16,15 +16,15 @@ describe ('Frame', function(){
   });
 
   it('can reduce the number of pins when it receives a roll', function(){
-    frame.getRollOne(1)
+    frame.getRoll(1)
     expect(frame.pinsRemaining).toEqual(9)
   });
 
   it('knows what the score is for each roll', function(){
     frame.pinsRemaining = 10
-    frame.getRollOne(4)
+    frame.getRoll(4)
     expect(frame.rollOneScore).toEqual(4);
-    frame.getRollTwo(6)
+    frame.getRoll(6)
     expect(frame.rollTwoScore).toEqual(6);
   });
       

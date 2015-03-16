@@ -6,23 +6,23 @@ FrameTen = function() {
   this.rollOneDone = false
   this.rollTwoDone = false
   this.rollThreeDone = false
+  this.frameOver = false
 };
+
+FrameTen.prototype.getRoll = function(roll){
+  if(!this.rollOneDone) return this.getRollOne(roll);
+  if(!this.rollTwoDone) return this.getRollTwo(roll);
+  if(this.isRollThree()) return this.getRollThree(roll);
+  return frameOver = true;
+}
 
 FrameTen.prototype.isStrike = function(roll){
   return roll === 10
 }
 
-FrameTen.prototype.rollOneScoreStrike = function(){
-  this.rollOneScore = 10
-}
-
-FrameTen.prototype.rollTwoScoreStrike = function(){
-  this.rollTwoScore = 10
-}
-
 FrameTen.prototype.getRollOne = function(roll) {
   if(this.isStrike(roll)){
-    this.rollOneScoreStrike(roll)  
+    this.rollOneScore = 10
   }else{ 
     this.rollOneScore = this.getScore(roll)   
   }
@@ -31,7 +31,7 @@ FrameTen.prototype.getRollOne = function(roll) {
 
 FrameTen.prototype.getRollTwo = function(roll){
   if(this.isStrike(roll)) {
-    this.rollTwoScoreStrike()
+    this.rollTwoScore = 10
   }else{
     this.rollTwoScore = this.getScore(roll)   
   }; 
@@ -39,11 +39,7 @@ FrameTen.prototype.getRollTwo = function(roll){
 };
 
 FrameTen.prototype.getRollThree = function(roll){
-  if(this.isRollThree()){
-    this.rollThreeScore = roll
-  }else{
-    this.rollThreeScore = 0;
-  }  
+  this.rollThreeScore = roll 
   this.rollThreeDone = true
 };
 

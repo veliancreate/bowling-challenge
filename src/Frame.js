@@ -6,6 +6,11 @@ Frame = function() {
   this.rollTwoDone = false
 };
 
+Frame.prototype.getRoll = function(roll){
+  if(!this.rollOneDone) return this.getRollOne(roll);
+  if(!this.rollTwoDone) return this.getRollTwo(roll);    
+}
+
 Frame.prototype.getRollOne = function(roll) {
   this.rollOneScore = this.getScore(roll);
   this.rollOneDone = true;
