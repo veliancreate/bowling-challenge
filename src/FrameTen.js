@@ -8,35 +8,34 @@ FrameTen = function() {
   this.rollThreeDone = false
 };
 
-FrameTen.prototype.getRollOne = function(roll, player) {
-  if(roll === 10) {
-    this.rollOneScore = 10
-    player.newFrame()
-  }else if(roll !== 10) {
+FrameTen.prototype.isStrike = function(roll){
+  return roll === 10
+}
+
+FrameTen.prototype.rollOneScoreStrike = function(){
+  this.rollOneScore = 10
+}
+
+FrameTen.prototype.rollTwoScoreStrike = function(){
+  this.rollTwoScore = 10
+}
+
+FrameTen.prototype.getRollOne = function(roll) {
+  if(this.isStrike(roll)){
+    this.rollOneScoreStrike(roll)  
+  }else{ 
     this.rollOneScore = this.getScore(roll)   
   }
   this.rollOneDone = true;
 };
 
-FrameTen.prototype.getRollTwo = function(roll, player){
-  if(roll === 10) {
-    this.rollTwoScore = 10
-    player.newFrame()
-  }else if(roll !== 10) {
+FrameTen.prototype.getRollTwo = function(roll){
+  if(this.isStrike(roll)) {
+    this.rollTwoScoreStrike()
+  }else{
     this.rollTwoScore = this.getScore(roll)   
   }; 
-  if(this.rollOneScore + this.rollTwoScore === 10){
-    player.newFrame;
-  }
   this.rollTwoDone = true;
-};
-
-FrameTen.prototype.isRollThree = function(){
-  if(this.rollOneScore + this.rollTwoScore >= 10){
-    return true
-  }else{
-    return false
-  }
 };
 
 FrameTen.prototype.getRollThree = function(roll){
@@ -46,6 +45,11 @@ FrameTen.prototype.getRollThree = function(roll){
     this.rollThreeScore = 0;
   }  
   this.rollThreeDone = true
+};
+
+FrameTen.prototype.isRollThree = function(){
+  if(this.rollOneScore + this.rollTwoScore >= 10) return true
+  return false
 };
 
 FrameTen.prototype.getScore = function(roll){  
