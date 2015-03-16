@@ -49,6 +49,10 @@ $('document').ready(function(){
     $('#take-roll').text("New Game!");
   }
 
+  function totalScore(){
+    $('#total-score').text(scoreboard.currentScore);
+  };
+
   function getRoll(){
     return player.roll();
   };
@@ -103,7 +107,7 @@ $('document').ready(function(){
   function onClickDo(){
     populateRollArray();
     populateTable();
-    if(isFrameTen = true) checkFrameTen();
+    if(isFrameTen === true) return checkFrameTen();
     if(isRollOneDone() && isRollTwoDone()) closeFrame();
   }
 
@@ -121,7 +125,6 @@ $('document').ready(function(){
     }else{
       rackFrameTen();
     }  
-    console.log(scoreboard.frameScores.length)
   }
 
   function doScoreBoardCloseFrame(){
@@ -165,8 +168,5 @@ $('document').ready(function(){
     }); 
   };
 
-  function totalScore(){
-    $('#total-score').text(scoreboard.currentScore);
-  };
 
 });
