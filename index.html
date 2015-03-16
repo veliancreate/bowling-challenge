@@ -8,6 +8,8 @@
   <script src="src/FrameTen.js"></script>
   <script src="src/Player.js"></script>
   <script src="src/ScoreBoard.js"></script>
+  <link rel="stylesheet" type="text/css" href="main.css">
+
 
 </head>
 
@@ -15,61 +17,82 @@
 
   <h1>Bowling!</h1>
 
-  <h2>Pins Remaining in Frame</h2>
-  <h2 id="pins-remaining"></h2>
-  <section><a id="take-roll" href="#"></a></section>
+  <section>
+    <a id="new-game" href="#">New game</a>
+  </section>
+
+  <h2>Enter roll score</h2>
+
+  <table id="input">
+    <tr>
+      <td colspan="1"><a class="number" id="1" href="#">1</a></td>
+      <td colspan="1"><a class="number" id="2" href="#">2</a></td>
+      <td colspan="1"><a class="number" id="3" href="#">3</a></td>
+    </tr>
+    <tr>
+      <td colspan="1"><a class="number" id="4" href="#">4</a></td>
+      <td colspan="1"><a class="number" id="5" href="#">5</a></td>
+      <td colspan="1"><a class="number" id="6" href="#">6</a></td>
+    </tr> 
+    <tr>
+      <td colspan="1"><a class="number" id="7" href="#">7</a></td>
+      <td colspan="1"><a class="number" id="8" href="#">8</a></td>
+      <td colspan="1"><a class="number" id="9" href="#">9</a></td>
+      <td colspan="1"><a class="number" id="10" href="#">10</a></td>
+    </tr>  
+  </table>
 
   <table>
-  <tr>
-    <th colspan="2">Frame 1</th>
-    <th colspan="2">Frame 2</th>
-    <th colspan="2">Frame 3</th>
-    <th colspan="2">Frame 4</th>
-    <th colspan="2">Frame 5</th>
-    <th colspan="2">Frame 6</th>
-    <th colspan="2">Frame 7</th>
-    <th colspan="2">Frame 8</th>
-    <th colspan="2">Frame 9</th>
-    <th colspan="3">Frame 10</th>
-    <th colspan="2">Total Score</th>
-  </tr>
-  <tr>
-    <td class="roll"></td>
-    <td class="roll"></td>
-    <td class="roll"></td>
-    <td class="roll"></td>
-    <td class="roll"></td>
-    <td class="roll"></td>
-    <td class="roll"></td>
-    <td class="roll"></td>
-    <td class="roll"></td>
-    <td class="roll"></td>
-    <td class="roll"></td>
-    <td class="roll"></td>
-    <td class="roll"></td>
-    <td class="roll"></td>
-    <td class="roll"></td>
-    <td class="roll"></td>
-    <td class="roll"></td>
-    <td class="roll"></td>
-    <td class="roll"></td>
-    <td class="roll"></td>
-    <td class="roll"></td>
-  </tr>
-  <tr>
-    <td colspan="2" class="frame"></td>
-    <td colspan="2" class="frame"></td>
-    <td colspan="2" class="frame"></td>
-    <td colspan="2" class="frame"></td>
-    <td colspan="2" class="frame"></td>
-    <td colspan="2" class="frame"></td>
-    <td colspan="2" class="frame"></td>
-    <td colspan="2" class="frame"></td>
-    <td colspan="2" class="frame"></td>
-    <td colspan="3" class="frame"></td>
-    <td id="total-score" colspan="2"></td>
-  </tr>
-</table>
+    <tr>
+      <th colspan="2">Frame 1</th>
+      <th colspan="2">Frame 2</th>
+      <th colspan="2">Frame 3</th>
+      <th colspan="2">Frame 4</th>
+      <th colspan="2">Frame 5</th>
+      <th colspan="2">Frame 6</th>
+      <th colspan="2">Frame 7</th>
+      <th colspan="2">Frame 8</th>
+      <th colspan="2">Frame 9</th>
+      <th colspan="3">Frame 10</th>
+      <th colspan="2">Total Score</th>
+    </tr>
+    <tr>
+      <td class="roll"></td>
+      <td class="roll"></td>
+      <td class="roll"></td>
+      <td class="roll"></td>
+      <td class="roll"></td>
+      <td class="roll"></td>
+      <td class="roll"></td>
+      <td class="roll"></td>
+      <td class="roll"></td>
+      <td class="roll"></td>
+      <td class="roll"></td>
+      <td class="roll"></td>
+      <td class="roll"></td>
+      <td class="roll"></td>
+      <td class="roll"></td>
+      <td class="roll"></td>
+      <td class="roll"></td>
+      <td class="roll"></td>
+      <td class="roll"></td>
+      <td class="roll"></td>
+      <td class="roll"></td>
+    </tr>
+    <tr>
+      <td colspan="2" class="frame"></td>
+      <td colspan="2" class="frame"></td>
+      <td colspan="2" class="frame"></td>
+      <td colspan="2" class="frame"></td>
+      <td colspan="2" class="frame"></td>
+      <td colspan="2" class="frame"></td>
+      <td colspan="2" class="frame"></td>
+      <td colspan="2" class="frame"></td>
+      <td colspan="2" class="frame"></td>
+      <td colspan="3" class="frame"></td>
+      <td id="total-score" colspan="2"></td>
+    </tr>
+  </table>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
   <script src="src/BowlingController.js"></script>
