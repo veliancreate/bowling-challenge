@@ -54,7 +54,7 @@ FrameTen.prototype.getRollTwo = function(roll){
 };
 
 FrameTen.prototype.getRollThree = function(roll){
-  this.rollThreeScore = roll 
+  this.rollThreeScore = this.getScore(roll) 
   this.rollThreeDone = true
   this.frameOver = true
 };

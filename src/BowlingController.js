@@ -2,7 +2,7 @@ $('document').ready(function(){
   
   var scoreboard
   var frame; 
-  var rollsArray
+  var rollsArray = []
 
   newGame();
   rackupFrame();
@@ -24,8 +24,15 @@ $('document').ready(function(){
   $('.number').click(function(){
     roll = parseInt($(this).data('value'))
     rollsArray.push(roll)
-    if(!frame.frameOver && !scoreboard.gameOver)     
+    if(!frame.frameOver && !scoreboard.gameOver){
+      frame.getRoll(roll);
+      doRemoveNumbers()
+    }     
   });
+
+  function doRemoveNumbers(){
+    console.log(frame.pinsRemaining)
+  };
 
   function totalScore(){
     $('#total-score').text(scoreboard.currentScore);
