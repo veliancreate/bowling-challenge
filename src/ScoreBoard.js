@@ -1,21 +1,8 @@
 ScoreBoard = function(){
   this.gameFrames = [];
   this.frameScores = [];
+  this.gameOver = false;
   this.currentScore = 0;
-};
-
-ScoreBoard.prototype.processScores = function(){
-  for (var i = 0; i < this.gameFrames.length; i++) {
-    frame = this.gameFrames[i];
-    this.accumulator(frame);   
-  };
-};
-
-ScoreBoard.prototype.accumulator = function(frame){
-  i = this.getFrameIndex(frame);
-  if(this.canCheck(frame)) this.standardFrameCheck(frame) 
-  if(typeof this.gameFrames[i+1]=='undefined') return this.frameTen(frame);  
-  if(typeof this.gameFrames[i+2]=='undefined') return this.frameNine(frame);  
 };
 
 ScoreBoard.prototype.totalUpGame = function(){
@@ -26,9 +13,30 @@ ScoreBoard.prototype.totalUpGame = function(){
   return this.currentScore = total;
 };
 
+ScoreBoard.prototype.processScores = function(){
+  for (var i = 0; i < this.gameFrames.length; i++) {
+    frame = this.gameFrames[i];
+    this.accumulator(frame);   
+  };
+};
+
 ScoreBoard.prototype.addFrame = function(frame){
   var n = this.gameFrames.length
   this.gameFrames[n] = frame;
+};
+
+ScoreBoard.prototype.accumulator = function(frame){
+  i = this.getFrameIndex(frame);
+  if(this.canCheck(frame)) this.standardFrameCheck(frame) 
+  if(typeof this.gameFrames[i+1]=='undefined') return this.frameTen(frame);  
+  if(typeof this.gameFrames[i+2]=='undefined') return this.frameNine(frame);  
+};
+
+ScoreBoard.prototype.canCheck = function(frame){
+  i = this.getFrameIndex(frame)
+  if(typeof this.gameFrames[i+1] == 'undefined') return false;
+  if(typeof this.gameFrames[i+2] == 'undefined') return false;
+  return true;
 };
 
 ScoreBoard.prototype.isStrike = function(frame){
@@ -46,13 +54,6 @@ ScoreBoard.prototype.getFrameIndex = function(frame){
 ScoreBoard.prototype.addFrameScores = function(frame){
   i = this.getFrameIndex(frame)
   this.frameScores[i] = frame.rollOneScore + frame.rollTwoScore;
-};
-
-ScoreBoard.prototype.canCheck = function(frame){
-  i = this.getFrameIndex(frame)
-  if(typeof this.gameFrames[i+1] == 'undefined') return false;
-  if(typeof this.gameFrames[i+2] == 'undefined') return false;
-  return true;
 };
 
 ScoreBoard.prototype.standardFrameCheck = function(frame){
@@ -93,7 +94,8 @@ ScoreBoard.prototype.standardHalfStrikeFrame = function(frame){
 
 ScoreBoard.prototype.frameTen = function(frame){
   i = this.getFrameIndex(frame);
-  this.frameScores[i] = frame.rollOneScore + frame.rollTwoScore + frame.rollThreeScore
+  this.frameScores[i] = frame.rollOneScore + frame.rollTwoScore + frame.rollThreeScore;
+  if(frame.frameOver = true) this.gameOver = true;
 };
 
 ScoreBoard.prototype.frameNine = function(frame){

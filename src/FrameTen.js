@@ -10,10 +10,25 @@ FrameTen = function() {
 };
 
 FrameTen.prototype.getRoll = function(roll){
+  this.isFrameOver();
   if(!this.rollOneDone) return this.getRollOne(roll);
   if(!this.rollTwoDone) return this.getRollTwo(roll);
+  this.doRollThree(roll);
+}
+
+FrameTen.prototype.doRollThree = function(roll){
   if(this.isRollThree()) return this.getRollThree(roll);
-  return frameOver = true;
+  this.rollThreeScore = 0;
+  this.frameOver = true;  
+};
+
+FrameTen.prototype.isRollThree = function(){
+  if(this.rollOneScore + this.rollTwoScore >= 10) return true;
+  return false;
+};
+
+FrameTen.prototype.isFrameOver = function(){
+  if(this.isRollThree() && this.rollThreeDone) return this.frameOver = true
 }
 
 FrameTen.prototype.isStrike = function(roll){
@@ -41,11 +56,7 @@ FrameTen.prototype.getRollTwo = function(roll){
 FrameTen.prototype.getRollThree = function(roll){
   this.rollThreeScore = roll 
   this.rollThreeDone = true
-};
-
-FrameTen.prototype.isRollThree = function(){
-  if(this.rollOneScore + this.rollTwoScore >= 10) return true
-  return false
+  this.frameOver = true
 };
 
 FrameTen.prototype.getScore = function(roll){  
