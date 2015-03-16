@@ -72,10 +72,10 @@ describe ('FrameTen', function(){
   it('can correctly score rolls', function(){
     frame.getRoll(5)
     frame.getRoll(5)
-    frame.getRoll(10)
+    frame.getRoll(5)
     expect(frame.rollOneScore).toEqual(5)
     expect(frame.rollTwoScore).toEqual(5)
-    expect(frame.rollThreeScore).toEqual(10)
+    expect(frame.rollThreeScore).toEqual(5)
   });
 
 

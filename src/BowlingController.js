@@ -24,7 +24,7 @@ $('document').ready(function(){
   $('.number').click(function(){
     roll = parseInt($(this).data('value'))
     rollsArray.push(roll)
-    if()    
+    if(!frame.frameOver && !scoreboard.gameOver)     
   });
 
   function totalScore(){

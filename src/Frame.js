@@ -3,12 +3,13 @@ Frame = function() {
   this.rollOneScore = 0
   this.rollTwoScore = 0
   this.rollOneDone = false
-  this.rollTwoDone = false
+  this.frameOver = false
 };
 
 Frame.prototype.getRoll = function(roll){
   if(!this.rollOneDone) return this.getRollOne(roll);
-  if(!this.rollTwoDone) return this.getRollTwo(roll);    
+  if(!this.rollTwoDone) return this.getRollTwo(roll);
+  return this.frameOver
 }
 
 Frame.prototype.getRollOne = function(roll) {
@@ -19,7 +20,7 @@ Frame.prototype.getRollOne = function(roll) {
 Frame.prototype.getRollTwo = function(roll){
   if(this.rollOneScore===10) this.rollTwoScore === 0
   if(this.rollOneScore!==10) this.rollTwoScore = this.getScore(roll);
-  this.rollTwoDone = true;
+  this.frameOver = true;
 };
 
 Frame.prototype.getScore = function(roll){  
