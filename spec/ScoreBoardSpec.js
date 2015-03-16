@@ -15,16 +15,16 @@ describe('ScoreBoard', function(){
 
   beforeEach(function(){
     scoreboard = new ScoreBoard();
-    frame1 = new Frame(1)
-    frame2 = new Frame(2)
-    frame3 = new Frame(3)
-    frame4 = new Frame(4)
-    frame5 = new Frame(5)
-    frame6 = new Frame(6)
-    frame7 = new Frame(7)
-    frame8 = new Frame(8)
-    frame9 = new Frame(9)
-    frame10 = new FrameTen(10)
+    frame1 = new Frame
+    frame2 = new Frame
+    frame3 = new Frame
+    frame4 = new Frame
+    frame5 = new Frame
+    frame6 = new Frame
+    frame7 = new Frame
+    frame8 = new Frame
+    frame9 = new Frame
+    frame10 = new FrameTen
   });
 
   function fillBoard(){
@@ -71,137 +71,139 @@ describe('ScoreBoard', function(){
   });
 
   it('knows when a player scores a turkey', function(){
-    frame1.rollOneScore = 10;
-    frame2.rollOneScore = 10;
-    frame3.rollOneScore = 10;
+    frame1.getRoll(10);
+    frame2.getRoll(10);
+    frame3.getRoll(10);
     fillBoard();
     scoreboard.processScores();
     expect(scoreboard.frameScores[0]).toEqual(30);  
   });
 
   it('knows when a player scores a double strike', function(){
-    frame1.rollOneScore = 10;
-    frame2.rollOneScore = 10;
-    frame3.rollOneScore = 5;
-    frame3.rollTwoScore = 3;
+    frame1.getRoll(10);
+    frame2.getRoll(10);
+    frame3.getRoll(5);
+    frame3.getRoll(3);
     fillBoard();
     scoreboard.processScores();
     expect(scoreboard.frameScores[0]).toEqual(25);
   });
 
   it('can accumulate scores after a strike', function(){
-    frame1.rollOneScore = 10;
-    frame2.rollOneScore = 5;
-    frame2.rollTwoScore = 3;
+    frame1.getRoll(10);
+    frame2.getRoll(5);
+    frame2.getRoll(3);
     fillBoard();
     scoreboard.processScores();
     expect(scoreboard.frameScores[0]).toEqual(18)
   });
 
   it('can accumulate after a half strike if the next roll is a strike', function(){
-    frame1.rollOneScore = 5;
-    frame1.rollTwoScore = 5;
-    frame2.rollOneScore = 10;
+    frame1.getRoll(5);
+    frame1.getRoll(5);
+    frame2.getRoll(10);
     fillBoard();
     scoreboard.processScores();
     expect(scoreboard.frameScores[0]).toEqual(20);
   });
 
   it('can accumulate after a half strike if the next roll isnt a strike', function(){
-    frame1.rollOneScore = 5;
-    frame1.rollTwoScore = 5;
-    frame2.rollOneScore = 8;
+    frame1.getRoll(5);
+    frame1.getRoll(5);
+    frame2.getRoll(8);
     fillBoard();
     scoreboard.processScores();
     expect(scoreboard.frameScores[0]).toEqual(18);
   });
 
   it('if frame 9 is a strike can add the next two rolls of frame 10', function(){
-    frame9.rollOneScore = 10;
-    frame10.rollOneScore = 3;
-    frame10.rollTwoScore = 4;
+    frame9.getRoll(10);
+    frame10.getRoll(3);
+    frame10.getRoll(4);
     fillBoard();
     scoreboard.processScores();
     expect(scoreboard.frameScores[8]).toEqual(17);       
   });
 
   it('if frame 9 is a half strike it can add the next roll of frame 10', function(){
-    frame9.rollOneScore = 5;
-    frame9.rollTwoScore = 5;
-    frame10.rollOneScore = 3;
+    frame9.getRoll(5);
+    frame9.getRoll(5);
+    frame10.getRoll(3);
     fillBoard();
     scoreboard.processScores();
     expect(scoreboard.frameScores[8]).toEqual(13);       
   });
 
   it('if frame 9 is not a half strike it can add its own frame scores', function(){
-    frame9.rollOneScore = 5;
-    frame9.rollTwoScore = 3;
-    frame10.rollOneScore = 3;
+    frame9.getRoll(5);
+    frame9.getRoll(3);
+    frame10.getRoll(3);
     fillBoard();
     scoreboard.processScores();
     expect(scoreboard.frameScores[8]).toEqual(8);       
   });
 
   it('can confirm if frame 9 is a turkey', function(){
-    frame9.rollOneScore = 10;
-    frame10.rollOneScore = 10;
-    frame10.rollTwoScore = 10
+    frame9.getRoll(10);
+    frame10.getRoll(10);
+    frame10.getRoll(10);
     fillBoard();
     scoreboard.processScores();
-    expect(scoreboard.frameScores[8]).toEqual(30);       
+    expect(scoreboard.frameScores[8]).toEqual(30);      
   });
 
   it('can calculate frame 10', function(){
-    frame10.rollOneScore = 10
-    frame10.rollTwoScore = 10
-    frame10.rollThreeScore = 10
+    frame10.getRoll(10)
+    frame10.getRoll(10)
+    frame10.getRoll(10)
     fillBoard()
     scoreboard.processScores();
     expect(scoreboard.frameScores[9]).toEqual(30)  
   });
 
   it('can calculate frame 10', function(){
-    frame10.rollOneScore = 5
-    frame10.rollTwoScore = 5
-    frame10.rollThreeScore = 10
+    frame10.getRoll(5)
+    frame10.getRoll(5)
+    frame10.getRoll(10)
     fillBoard()
     scoreboard.processScores();
     expect(scoreboard.frameScores[9]).toEqual(20)  
   });
 
   it('can calculate frame 10', function(){
-    frame10.rollOneScore = 3
-    frame10.rollTwoScore = 3
-    frame10.rollThreeScore = 0
+    frame10.getRoll(3)
+    frame10.getRoll(3)
+    frame10.getRoll(0)
     fillBoard()
     scoreboard.processScores();
-    expect(scoreboard.frameScores[9]).toEqual(6)  
+    expect(scoreboard.frameScores[9]).toEqual(6)
+    expect(scoreboard.gameOver).toEqual(true)  
   });
 
 
   it('can calculate a game', function(){
-    frame1.rollOneScore = 7
-    frame1.rollTwoScore = 3
-    frame2.rollOneScore = 10
-    frame3.rollOneScore = 3
-    frame3.rollTwoScore = 7
-    frame4.rollOneScore = 4
-    frame4.rollTwoScore = 5
-    frame5.rollOneScore = 10
-    frame6.rollOneScore = 3
-    frame6.rollTwoScore = 5
-    frame7.rollOneScore = 4
-    frame7.rollTwoScore = 6
-    frame8.rollOneScore = 10
-    frame9.rollOneScore = 10
-    frame10.rollOneScore = 10
-    frame10.rollTwoScore = 10
-    frame10.rollThreeScore = 10
+    frame1.getRoll(7)
+    frame1.getRoll(3)
+    frame2.getRoll(10)
+    frame3.getRoll(3)
+    frame3.getRoll(7)
+    frame4.getRoll(4)
+    frame4.getRoll(5)
+    frame5.getRoll(10)
+    frame6.getRoll(3)
+    frame6.getRoll(5)
+    frame7.getRoll(4)
+    frame7.getRoll(6)
+    frame8.getRoll(10)
+    frame9.getRoll(10)
+    frame10.getRoll(10)
+    frame10.getRoll(10)
+    frame10.getRoll(10)
     fillBoard();
     scoreboard.processScores();
     scoreboard.totalUpGame();
     expect(scoreboard.currentScore).toEqual(199)
+    expect(scoreboard.gameOver).toEqual(true)
   });
 
 });

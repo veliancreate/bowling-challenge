@@ -68,7 +68,6 @@ describe ('FrameTen', function(){
     expect(frame.rollThreeScore).toEqual(10)
   });
 
-
   it('can correctly score rolls', function(){
     frame.getRoll(5)
     frame.getRoll(5)
@@ -76,6 +75,14 @@ describe ('FrameTen', function(){
     expect(frame.rollOneScore).toEqual(5)
     expect(frame.rollTwoScore).toEqual(5)
     expect(frame.rollThreeScore).toEqual(5)
+  });
+
+  it('knows when there is a frame over', function(){
+    frame.getRoll(2);
+    frame.getRoll(3);
+    frame.getRoll(5);
+    expect(frame.frameOver).toEqual(true);
+    expect(frame.rollThreeScore).toEqual(0)
   });
 
 
