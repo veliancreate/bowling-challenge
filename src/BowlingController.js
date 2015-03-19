@@ -20,6 +20,7 @@ $('document').ready(function(){
 
   function rackupFrameTen(){
     frame = new FrameTen;
+    console.log(frame);
     showNumbers();
   }; 
 
@@ -29,14 +30,17 @@ $('document').ready(function(){
     frame.getRoll(roll);
     doRemoveNumbers(roll);
     populateRollTable();
-
     if(frame.frameOver){
       closeFrame();
     }
     if(frame.gameOver){
+      doScoreBoardCloseFrame();
+      populateTable();
+      totalScore();
+      console.log(frame)
+      console.log(scoreboard.frameScores)
       $('.number').hide();
     }
-
   });
 
   function doRemoveNumbers(roll){
@@ -51,8 +55,11 @@ $('document').ready(function(){
     doScoreBoardCloseFrame();
     populateTable()
     totalScore();
-    if(scoreboard.gameFrames.length < 10) return rackupFrame();
-    return rackupFrameTen(); 
+    if(scoreboard.gameFrames.length < 9){
+      rackupFrame();
+    }else{
+      rackupFrameTen();   
+    };  
   }
 
   function totalScore(){
@@ -87,7 +94,7 @@ $('document').ready(function(){
 
   function populateTable(){
     $('.frame').each(function(i){
-      if(typeof scoreboard.frameScores[i]!='undefined') return $(this).text(scoreboard.frameScores[i]);
+      return $(this).text(scoreboard.frameScores[i]);
       return $(this).text("-");
     });  
   };
