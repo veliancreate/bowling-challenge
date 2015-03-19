@@ -8,6 +8,9 @@ ScoreBoard = function(){
 ScoreBoard.prototype.totalUpGame = function(){
   var total = 0;
   for (var i = 0; i < this.frameScores.length; i++) { 
+    if(isNaN(this.frameScores[i])){
+      this.frameScores[i] = 0
+    }
     total += this.frameScores[i];
   };
   return this.currentScore = total;

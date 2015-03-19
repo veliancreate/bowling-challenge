@@ -6,7 +6,7 @@ FrameTen = function() {
   this.rollOneDone = false;
   this.rollTwoDone = false;
   this.rollThreeDone = false;
-  this.frameOver = false;
+  this.gameOver = false;
 };
 
 FrameTen.prototype.getRoll = function(roll){
@@ -19,7 +19,7 @@ FrameTen.prototype.getRoll = function(roll){
 FrameTen.prototype.doRollThree = function(roll){
   if(this.isRollThree()) return this.getRollThree(roll);
   this.rollThreeScore = 0;
-  this.frameOver = true;  
+  this.gameOver = true;  
 };
 
 FrameTen.prototype.isRollThree = function(){
@@ -56,7 +56,7 @@ FrameTen.prototype.getRollTwo = function(roll){
 FrameTen.prototype.getRollThree = function(roll){
   this.rollThreeScore = this.getScore(roll) 
   this.rollThreeDone = true
-  this.frameOver = true
+  this.gameOver = true
 };
 
 FrameTen.prototype.getScore = function(roll){  
