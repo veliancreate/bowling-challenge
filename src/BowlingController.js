@@ -15,42 +15,64 @@ $('document').ready(function(){
 
   function rackupFrame(){
     frame = new Frame;
+    showNumbers();
   }; 
 
   function rackupFrameTen(){
     frame = new FrameTen;
+    showNumbers();
   }; 
 
   $('.number').click(function(){
     roll = parseInt($(this).data('value'))
-    rollsArray.push(roll)
-    if(!frame.frameOver && !scoreboard.gameOver){
-      frame.getRoll(roll);
-      doRemoveNumbers()
-    }     
+    rollsArray.push(roll);
+    frame.getRoll(roll);
+    doRemoveNumbers(roll);
+    populateRollTable();
+
+    if(frame.frameOver){
+      closeFrame();
+    }
+    if(frame.gameOver){
+      $('.number').hide();
+    }
+
   });
 
-  function doRemoveNumbers(){
-    console.log(frame.pinsRemaining)
+  function doRemoveNumbers(roll){
+    $('.number').each(function(i){
+      if(i > frame.pinsRemaining) {
+        $(this).hide();
+      };  
+    });    
   };
+
+  function closeFrame(){
+    doScoreBoardCloseFrame();
+    populateTable()
+    totalScore();
+    if(scoreboard.gameFrames.length < 10) return rackupFrame();
+    return rackupFrameTen(); 
+  }
 
   function totalScore(){
     $('#total-score').text(scoreboard.currentScore);
   };
 
-  function closeFrame(){
-    doScoreBoardCloseFrame();
-    totalScore();
-    if(scoreboard.frameScores.length < 10) return rackupFrame();
-    return rackupFrameTen(); 
-  }
-
   function doScoreBoardCloseFrame(){
     scoreboard.addFrame(frame);
     scoreboard.processScores();
-    scoreboard.totalUpGame();  
+    scoreboard.totalUpGame(); 
   };
 
+  function showNumbers(){
+    $('.number').show();
+  }
+
+  $('#new-game').click(function(){
+    location.reload();
+  });
+      
   function populateRollTable(){
     $('.roll').each(function(i){
       $(this).text(rollsArray[i]);

@@ -20,6 +20,7 @@ Frame.prototype.getRollOne = function(roll) {
 Frame.prototype.getRollTwo = function(roll){
   if(this.rollOneScore===10) this.rollTwoScore === 0
   if(this.rollOneScore!==10) this.rollTwoScore = this.getScore(roll);
+  this.frameTwoDone = true;  
   this.frameOver = true;
 };
 
