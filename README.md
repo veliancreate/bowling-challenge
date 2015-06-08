@@ -2,11 +2,19 @@
 Bowling Challenge
 =================
 
-    Test time: Friday, the entire day and the weekend if you need it.
-    Feel free to use Google, your notes, and your books.
+## Tech used
+
+JS, JQuery, Jasmine.
+
+## Lessons learned
+
+This was a challenging task to build a bowling calculator and include a front end UI. I took an OOP approach which was the first time I had done so with Javascript. All my tests are passing, but I would like to refactor some of the code in the main calculator page. I would also like to itegrate Angular so create a realtime calculator.... TBC.
 
 Task: 
 -----
+
+    Test time: Friday, the entire day and the weekend if you need it.
+    Feel free to use Google, your notes, and your books.
 
 Count and sum the scores of a bowling game for one player (in JavaScript).
 
